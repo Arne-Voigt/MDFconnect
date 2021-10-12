@@ -38,15 +38,22 @@ set(hdd, 'HeightLimits', [30,30]);
 %set(hb, 'HeightLimits',[20,20])
 
 
+%% get all MDF_OBJECT in ws --> update dropDown
+vars = evalin('base', 'whos');
 
+matches = strcmp({vars.class}, 'MDF_OBJECT');
+mdfObjects = {vars(matches).name};
 
+hdd = evalin('base', 'hdd');
+set(hdd, 'String', mdfObjects);
 
-
-
+%% setup tree
+if isempty(mdfObjects); return; end;
 
 % [mtree, treeContainer] = uitree('v0', 'root', MdfObjWrite.getTreeNode(), 'Parent', hc_main); % Parent is ignored
-[mtree, treeContainer] = uitree('v0', 'root', MdfObjRead.getTreeNode(),  'Parent', hc_main); % Parent is ignored
-      
+objToDraw = evalin('base', mdfObjects{1});
+[mtree, treeContainer] = uitree('v0', 'root', objToDraw.getTreeNode(),  'Parent', hc_main); % Parent is ignored
+clear objToDraw     
 jtree = mtree.getTree;
 % MousePressedCallback is not supported by the uitree, but by jtree
 set(jtree, 'MousePressedCallback',  @gui.cb_mbp);
