@@ -35,7 +35,6 @@ hdd = uicontrol('Style','popup', 'String',mdfObjects);
 set(hdd, 'parent', hc_minor);
 set(hdd, 'callback', @gui.cb_dd);
 set(hdd, 'HeightLimits', [30,30]);
-%set(hb, 'HeightLimits',[20,20])
 
 
 %% get all MDF_OBJECT in ws --> update dropDown
@@ -52,7 +51,8 @@ if isempty(mdfObjects); return; end;
 
 % [mtree, treeContainer] = uitree('v0', 'root', MdfObjWrite.getTreeNode(), 'Parent', hc_main); % Parent is ignored
 objToDraw = evalin('base', mdfObjects{1});
-[mtree, treeContainer] = uitree('v0', 'root', objToDraw.getTreeNode(),  'Parent', hc_main); % Parent is ignored
+strTreeInfo = sprintf('%s.getTreeNode()', mdfObjects{1});
+[mtree, treeContainer] = uitree('v0', 'root', evalin('base', strTreeInfo),  'Parent', hc_main); % Parent is ignored
 clear objToDraw     
 jtree = mtree.getTree;
 % MousePressedCallback is not supported by the uitree, but by jtree
