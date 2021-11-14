@@ -1,21 +1,23 @@
-tic
 
-import matlab.unittest.TestRunner;
-import matlab.unittest.TestSuite;
+import matlab.unittest.TestRunner
+import matlab.unittest.Verbosity
+%import matlab.unittest.plugins.CodeCoveragePlugin
+% import matlab.unittest.plugins.XMLPlugin
+%import matlab.unittest.plugins.codecoverage.CoberturaFormat
 
-% get folder of this file
-thisScriptPath = mfilename('fullpath');
-[thisScriptFolder, ~, ~] = fileparts(thisScriptPath);
+%name = "MyProject";
 
-suite = TestSuite.fromFolder(fullfile(thisScriptFolder));
-%suite = TestSuite.fromFile(fullfile(thisScriptFolder, 'data','propMode.m'));
-% suite = suite.selectIf(matlab.unittest.selectors.HasParameter);
-
+suite = testsuite('simpleTest.m');
 runner = TestRunner.withTextOutput('Verbosity', matlab.unittest.Verbosity.Concise);
-%runner = TestRunner.withTextOutput('OutputDetail',0);
+
+% mkdir('code-coverage');
+% mkdir('test-results');
+
+% runner.addPlugin(XMLPlugin.producingJUnitFormat('test-results/results.xml'));
+%runner.addPlugin(CodeCoveragePlugin.forPackage(name, 'Producing', CoberturaFormat('code-coverage/coverage.xml')));
 
 
-result = runner.run(suite);
+results = runner.run(suite);
+assert(~isempty(results), 'no tests found')
 
-toc
-
+%assertSuccess(results)
