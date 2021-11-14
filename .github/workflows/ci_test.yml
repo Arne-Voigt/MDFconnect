@@ -31,6 +31,6 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: run Matlab test
-        run: matlab-actions/run-tests@v0
+        run: matlab-actions/run@v0
           
     
