@@ -3,7 +3,7 @@ classdef simpleTest < matlab.unittest.TestCase
         % timeseries
         signal_f64;
         signal_f32;
-        %signal_bool;
+        signal_bool;
         signal_uint8;
     end
     
@@ -13,13 +13,19 @@ classdef simpleTest < matlab.unittest.TestCase
             time =       0:0.05:6.28;
             sin_f64 =    double(sin(time));
             sin_f32 =    single(sin(time));
-            %sin_bool =   logical(sin(time) >= 0);
-            %ramp_uint8 = uint8(time*20);
+            sin_bool =   logical(sin(time) >= 0);
+            ramp_uint8 = uint8(time*20);
             % set timeseries
-            obj.signal_f64 =   timeseries(time, sin_f64,    'Name', 'signal_f64');
-            obj.signal_f32 =   timeseries(time, sin_f32,    'Name', 'signal_f32');
-            %obj.signal_bool =  timeseries(sin_bool,   time, 'Name', 'signal_bool');
-            %obj.signal_uint8 = timeseries(time, ramp_uint8, 'Name', 'signal_uint8');
+            obj.signal_f64 =   timeseries(sin_f64, time,    'Name', 'signal_f64');
+            obj.signal_f32 =   timeseries(sin_f32, time,    'Name', 'signal_f32');
+            obj.signal_bool =  timeseries(sin_bool,   time, 'Name', 'signal_bool');
+            obj.signal_uint8 = timeseries(ramp_uint8, time, 'Name', 'signal_uint8');
+            
+            %squeeze data from three dimentions into one
+            obj.signal_f64.Data    = squeeze(obj.signal_f64.Data);
+            obj.signal_f32.Data    = squeeze(obj.signal_f32.Data);
+            obj.signal_bool.Data   = squeeze(obj.signal_bool.Data);
+            obj.signal_uint8.Data  = squeeze(obj.signal_uint8.Data);
         end
     end
         
@@ -30,8 +36,8 @@ classdef simpleTest < matlab.unittest.TestCase
             dataBucket = tsBucket();
             dataBucket.add(testCase.signal_f64); 
             dataBucket.add(testCase.signal_f32);
-            %dataBucket.add(testCase.signal_bool);
-            %dataBucket.add(testCase.signal_uint8);
+            dataBucket.add(testCase.signal_bool);
+            dataBucket.add(testCase.signal_uint8);
             
             MdfObjWrite = MDF_OBJECT();
             MdfObjWrite.importTsBucket(dataBucket); 
@@ -53,10 +59,9 @@ classdef simpleTest < matlab.unittest.TestCase
             % compare read value with the original values
             testCase.verifyEqual(testCase.signal_f64,   signal_f64);
             testCase.verifyEqual(testCase.signal_f32,   signal_f32);
-            %testCase.verifyEqual(testCase.signal_bool,  signal_bool);
-            %testCase.verifyEqual(testCase.signal_uint8, signal_uint8);
+            testCase.verifyEqual(testCase.signal_bool,  signal_bool);
+            testCase.verifyEqual(testCase.signal_uint8, signal_uint8);
             
-               disp('tested 11')
         end
     end
     
