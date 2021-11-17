@@ -1,4 +1,4 @@
-name: MATLAB on GitHub-Hosted Runner
+name: matlab test
 
 on:
   workflow_dispatch:
