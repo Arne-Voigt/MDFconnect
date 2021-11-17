@@ -1,6 +1,7 @@
 name: MATLAB on GitHub-Hosted Runner
 
 on:
+  workflow_dispatch:
   push:
     paths:
     - "**.m"
