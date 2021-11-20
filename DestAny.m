@@ -5,7 +5,7 @@ import matlab.unittest.Verbosity
 % import matlab.unittest.plugins.XMLPlugin
 %import matlab.unittest.plugins.codecoverage.CoberturaFormat
 
-%name = "MyProject";
+%name = "MyProject"; 
 
 suite = testsuite('simpleTest.m');
 runner = TestRunner.withTextOutput('Verbosity', matlab.unittest.Verbosity.Concise);
