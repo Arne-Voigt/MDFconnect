@@ -3,7 +3,7 @@ classdef simpleTest < matlab.unittest.TestCase
         % timeseries
         signal_f64;
         signal_f32;
-        signal_bool;
+        signal_bool; 
         signal_uint8;
     end
     
