@@ -5,8 +5,7 @@ on:
   push:
     paths:
     - "**.m"
-    - ".github/workflows/ci_matlab.yml"
-
+    - ".github/workflows/ci_test.yml"
 
 jobs:
   linux:
@@ -27,4 +26,4 @@ jobs:
       - name: Run commands
         uses: matlab-actions/run-command@v1
         with:
-          command: test.dispTest
+          command: test.run

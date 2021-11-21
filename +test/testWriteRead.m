@@ -1,4 +1,4 @@
-classdef simpleTest < matlab.unittest.TestCase
+classdef testWriteRead < matlab.unittest.TestCase
     properties
         % timeseries
         signal_f64;
@@ -8,7 +8,7 @@ classdef simpleTest < matlab.unittest.TestCase
     end
     
     methods
-        function obj = simpleTest()
+        function obj = testWriteRead()
             % raw signals
             time =       0:0.05:6.28;
             sin_f64 =    double(sin(time));
