@@ -1,6 +1,6 @@
 classdef tsBucket < handle
     %TSBUCKET Summary of this class goes here
-    %   Detailed explanation goes here
+    %   collection of timeseries and tscollection objects, which this collection is then to be added into an mdf-file 
     
     properties (Access = 'protected')
     listOfTs = {};
