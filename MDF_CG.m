@@ -95,7 +95,7 @@ classdef MDF_CG < MDF_BaseClass
                     sigType = CN_SigTypes.FLOAT;
                 otherwise
                     if isenum(data)
-                        sigType = CN_SigTypes.INT_32;
+                        sigType = CN_SigTypes.INT_16;
                     else
                         sigType = CN_SigTypes.DOUBLE;
                     end
