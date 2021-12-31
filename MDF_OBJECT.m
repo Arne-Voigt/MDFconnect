@@ -70,7 +70,7 @@ classdef MDF_OBJECT < MDF_BaseClass
                     % channel in the same channelGroup
                     for collectionItemName = itemToInsert.gettimeseriesnames
                         itemFromCollection = itemToInsert.get(collectionItemName{:});
-                        itemToInsertList = this.splitTs(itemToInsert);         % for array/vector data -> splits the ts into multiple "scalar" ts
+                        itemToInsertList = this.splitTs(itemFromCollection);         % for array/vector data -> splits the ts into multiple "scalar" ts
                         for i = 1:numel(itemToInsertList)
                             cg.addChannel(itemToInsertList{i}, CN_Types.VALUE);    % value channel
                         end
@@ -226,7 +226,7 @@ classdef MDF_OBJECT < MDF_BaseClass
       
     methods (Access = 'private')
         
-        function [ tsList ] = splitTs(~, tsToSplit )
+        function [ tsList ] = splitTs(this, tsToSplit )
             % nothing to split -> return unchanged ts
             if all(tsToSplit.getdatasamplesize() == 1)
                 tsList = {tsToSplit};
@@ -239,7 +239,7 @@ classdef MDF_OBJECT < MDF_BaseClass
             % run thru all indices
             while any(cntInc ~= cntFinal) % technically a do-while loop would be better
                 % fprintf('%s\n', mat2str(cntInc))
-                tsList{end+1} = getSubTs(tsToSplit, cntInc); % create sub-ts
+                tsList{end+1} = this.getSubTs(tsToSplit, cntInc); % create sub-ts
                 cntInc(1) = cntInc(1) + 1;
                 for i = 1:numel(cntFinal)
                     if cntInc(i) > cntFinal(i)
@@ -250,21 +250,20 @@ classdef MDF_OBJECT < MDF_BaseClass
                     end
                 end
             end
-            tsList{end+1} = getSubTs(tsToSplit, cntInc); % create one last sub-ts
+            tsList{end+1} = this.getSubTs(tsToSplit, cntInc); % create one last sub-ts
         end %splitTs()
         
         function retTs = getSubTs(this, ts, idx)
             retTs = ts;
             
             % set name
-            name = [ts.Name, '_'];
+            retTs.Name = [ts.Name, '__'];
             for i=1:numel(idx)
-                name = [name, mat2str(idx(i)-1)];
+                retTs.Name = [retTs.Name, mat2str(idx(i)-1)];
                 if i < numel(idx)
-                    name = [name, '_'];
+                    retTs.Name = [retTs.Name, '_'];
                 end
             end
-            retTs.Name = name;
             
             % extract sub-Ts
             idxStr = '( ';
