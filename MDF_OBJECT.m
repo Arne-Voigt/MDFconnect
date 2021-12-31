@@ -52,8 +52,11 @@ classdef MDF_OBJECT < MDF_BaseClass
                     dg = this.hHD.addDataGroup();
                     dg.hCG_1stChannelGroup = MDF_CG();
                     cg=dg.hCG_1stChannelGroup;
-                    cg.addChannel(itemToInsert, CN_Types.TIME);     % time channel
-                    cg.addChannel(itemToInsert, CN_Types.VALUE);    % value channel
+                    itemToInsertList = this.splitTs(itemToInsert);         % for array/vector data -> splits the ts into multiple "scalar" ts
+                    cg.addChannel(itemToInsertList{1}, CN_Types.TIME);     % time channel
+                    for i = 1:numel(itemToInsertList)
+                        cg.addChannel(itemToInsertList{i}, CN_Types.VALUE);    % value channel
+                    end
                     % [TODO] what if the data is not a sclar but a vector
                     % -> for mdf3.0 add "[x]-name indexing"
                 end
@@ -67,7 +70,11 @@ classdef MDF_OBJECT < MDF_BaseClass
                     % channel in the same channelGroup
                     for collectionItemName = itemToInsert.gettimeseriesnames
                         itemFromCollection = itemToInsert.get(collectionItemName{:});
-                        cg.addChannel(itemFromCollection, CN_Types.VALUE);  % yet another value channel
+                        itemToInsertList = this.splitTs(itemToInsert);         % for array/vector data -> splits the ts into multiple "scalar" ts
+                        for i = 1:numel(itemToInsertList)
+                            cg.addChannel(itemToInsertList{i}, CN_Types.VALUE);    % value channel
+                        end
+                        %cg.addChannel(itemFromCollection, CN_Types.VALUE);  % yet another value channel
                     end
                 end
                 
@@ -217,6 +224,58 @@ classdef MDF_OBJECT < MDF_BaseClass
 
     end
       
+    methods (Access = 'private')
+        
+        function [ tsList ] = splitTs(~, tsToSplit )
+            % nothing to split -> return unchanged ts
+            if all(tsToSplit.getdatasamplesize() == 1)
+                tsList = {tsToSplit};
+                return;
+            end
+            
+            cntFinal = tsToSplit.getdatasamplesize();
+            cntInc = cntFinal./cntFinal;
+            tsList = {};
+            % run thru all indices
+            while any(cntInc ~= cntFinal) % technically a do-while loop would be better
+                % fprintf('%s\n', mat2str(cntInc))
+                tsList{end+1} = getSubTs(tsToSplit, cntInc); % create sub-ts
+                cntInc(1) = cntInc(1) + 1;
+                for i = 1:numel(cntFinal)
+                    if cntInc(i) > cntFinal(i)
+                        cntInc(i) = 1;
+                        cntInc(i+1) = cntInc(i+1) + 1;
+                    else
+                        break
+                    end
+                end
+            end
+            tsList{end+1} = getSubTs(tsToSplit, cntInc); % create one last sub-ts
+        end %splitTs()
+        
+        function retTs = getSubTs(this, ts, idx)
+            retTs = ts;
+            
+            % set name
+            name = [ts.Name, '_'];
+            for i=1:numel(idx)
+                name = [name, mat2str(idx(i)-1)];
+                if i < numel(idx)
+                    name = [name, '_'];
+                end
+            end
+            retTs.Name = name;
+            
+            % extract sub-Ts
+            idxStr = '( ';
+            for i=1:numel(idx)
+                idxStr = [idxStr, mat2str(idx(i)), ', '];
+            end
+            idxStr = [idxStr, ': )'];
+            eval(['retTs.Data = retTs.Data' idxStr ';']);
+        end %getSubTs()
+    end
+    
     methods (Static)
         function nameReformat = defaultSignalNameParser(nameRaw)
             % remove everthing that is not a-z or A-Z or 0-9 or '_'
