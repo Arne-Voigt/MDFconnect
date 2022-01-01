@@ -25,7 +25,7 @@ clear objToDraw
 jtree = mtree.getTree;
 % MousePressedCallback is not supported by the uitree, but by jtree
 set(jtree, 'MousePressedCallback',  @gui.cb_mbp);
-  
+drawnow
 
 %[mtree, container] = uitree('v0', 'root',root, 'Parent',hc); % Parent is ignored
 %[mtree,container] = uitree('v0', 'Root', root,'Position',[50,50,150,150],SelectionChangeFcn, @callback);
