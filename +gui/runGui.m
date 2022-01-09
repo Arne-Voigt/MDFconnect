@@ -18,7 +18,7 @@ hpb =  uicontrol('string',' ','parent',hc_minor);
 set(hpb, 'WidthLimits', [0 30]);
 set(hpb, 'callback', @gui.cb_pb)
 % icon in pushbutton
-[a,map]=imread('+gui/myUpdate_3.png');
+[a,map]=imread('+gui/myUpdate_6.png');
 [r,c,d]=size(a); 
 x=ceil(r/18); 
 y=ceil(c/25); 
