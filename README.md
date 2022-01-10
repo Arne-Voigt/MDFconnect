@@ -3,8 +3,8 @@ mdf read/write
 
 ## Gui
 
-The gui shows the structure of the mdf objects in the matlab workspace. 
-Each element of the structure can be exported into the workspace (ctrl+double_mouse_left), this allows to check the details or tweak the content.
+The gui shows the structure of a mdf object in the matlab workspace. 
+Each element of the structure can be exported into the workspace (ctrl+mouse_left), this allows to check for details or tweak the content.
 Note the gui shows the structur of the object in the matlab workspace and not the actual structur of the mdf file.
 To inspect the actual file use the MDFValidator from Vector Informatik GmbH.
   
@@ -13,7 +13,7 @@ at the time when `gui.runGui` was executed, where present in the matlab workspac
   
 ![gui main](/doc/guiMain.JPG "main")
   
-Press the update button to update the objects in the drop down menu.
+Press the update button to refresh the objects in the drop down menu.
 ![gui update](/doc/guiUpdate.JPG "update")
   
 ![gui ans](/doc/guiAns.JPG "ans")
