@@ -1,4 +1,4 @@
-classdef MDF_OBJECT < MDF_BaseClass
+classdef MDF_OBJECT < MDF_BaseClass & matlab.mixin.Copyable
     % header block
     
     properties
