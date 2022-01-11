@@ -7,7 +7,7 @@ The repo allows the export of Matlab/Simulink simulation data into the mdf file 
 This repo was generated to familiar myself with object orientated programming in Matlab, so don’t expect this to be error free. 
 However, I found it to more convenient, reliable and faster than the widely used “mdfimport” script. 
 But you may also want to consider the “Vehicle Network Toolbox”, which is the Matlab internal toolbox for interactions with the mdf/m4f files. 
-Alternatively, you could use one of mdf importer/exporter libraries from python, those are often well maintained, and access it through Matlabs python-interface.  
+Alternatively, you could use one of the mdf importer/exporter libraries from python, those are often well maintained, and access it through Matlabs python-interface.  
 
 ## Gui
 
