@@ -21,5 +21,5 @@ the be tweaked (e.g. delete a link), that tweaking will be also affect the respe
 copying of handle-classes.      
 ![gui ans](/doc/guiAns.JPG "ans")
   
-The gui might fail if the object has to many element, this happens for measuremtents with thousends of signals.
+The gui might fail if the object has to many element, this happens for measuremtents with thousands of signals.
 ![gui ans](/doc/guiError.JPG "error")
