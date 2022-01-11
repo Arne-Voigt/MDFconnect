@@ -3,12 +3,12 @@ mdf read/write
 
 ## Gui
 
-The gui shows the structure of a mdf object in the matlab workspace. 
+The gui shows the structure of MDF_OBJECT objects (variables) inside the matlab workspace. 
 Each element of the structure can be exported into the workspace (ctrl+mouse_left), this allows to check for details or tweak the content.
-Note the gui shows the structure of the object in the matlab workspace and not the structur of the mdf file.
+Note the gui shows the structure of the matlab workspace object and not the structure of the mdf file.
 To inspect the actual file use the MDFValidator from Vector Informatik GmbH.
   
-Start the gui via: `gui.runGui`. The displayed object can be selected through the drop down menu. The drop down menu contains all MDF_OBJECT objects that, 
+To start the gui type: `gui.runGui`.Use the drop down menu to change the displayed object. The drop down menu contains all MDF_OBJECT objects that, 
 at the time when `gui.runGui` was executed, where present in the matlab workspace.
   
 ![gui main](/doc/guiMain.JPG "main")
