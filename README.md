@@ -5,8 +5,8 @@ The repo allows the export of Matlab/Simulink simulation data into the mdf file 
  To get started use the repo MDFconnect_example, it includes a two simple example scripts for writing Simulink data into a mdf-file and for importing mdf-data into the Matlab workspace. 
   
 This repo was generated to familiar myself with object orientated programming in Matlab, so don’t expect this to be error free. 
-However, I found it to more convenient, reliable and faster than the widely used “mdfimport” script. 
-But you may also want to consider the “Vehicle Network Toolbox”, which is the Matlab internal toolbox for interactions with the mdf/m4f files. 
+However, I found it to be more reliable and faster than the widely used “mdfimport” script. 
+But you may also want to consider the “Vehicle Network Toolbox”, which is Matlabs internal toolbox for interactions with the mdf/m4f files. 
 Alternatively, you could use one of the mdf importer/exporter libraries from python, those are often well maintained, and access it through Matlabs python-interface.  
 
 ## Gui
@@ -16,7 +16,7 @@ Each element of the structure can be exported into the workspace (ctrl+mouse_lef
 Note the gui shows the structure of the Matlab workspace object and not the structure of the mdf file.
 To inspect the actual file, use the MDFValidator from Vector Informatik GmbH.
   
-To start the gui type: `gui.runGui` .Use the drop down menu to change the displayed object. The drop down menu contains all MDF_OBJECT objects that, 
+To start the gui type: `gui.runGui`. Use the drop down menu to change the displayed object. The drop down menu contains all MDF_OBJECT objects that, 
 at the time when `gui.runGui` was executed, where present in the Matlab workspace.
   
 ![gui main](/doc/guiMain.JPG "main")
