@@ -20,14 +20,13 @@ Example for writing:
   
 `simDataBucket = tsBucket();`
 
-`simDataBucket.add(logsout);     % get some simulation logged signals`
-
+`simDataBucket.add(logsout);`   --> get some simulation data
 
 `MdfObjWrite = MDF_OBJECT();`
 
-`MdfObjWrite.importTsBucket(simDataBucket);`
+`MdfObjWrite.importTsBucket(simDataBucket);`   --> import the data
 
-`MdfObjWrite.print('testWrite.mdf');`
+`MdfObjWrite.print('testWrite.mdf');`   --> write the file
 
 
 
