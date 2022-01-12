@@ -20,13 +20,32 @@ Example for writing:
   
 `simDataBucket = tsBucket();`
 
-`simDataBucket.add(logsout);`   --> get some simulation data
+`simDataBucket.add(logsout);`   -> get some simulation data
 
 `MdfObjWrite = MDF_OBJECT();`
 
-`MdfObjWrite.importTsBucket(simDataBucket);`   --> import the data
+`MdfObjWrite.importTsBucket(simDataBucket);`   -> import the data
 
-`MdfObjWrite.print('testWrite.mdf');`   --> write the file
+`MdfObjWrite.print('testWrite.mdf');`   -> write the file
+
+Example for reading:
+
+`MdfObjRead = MDF_OBJECT();`
+
+`MdfObjRead.read('testWrite.mdf');`   -> read the mdf file
+Next extract some signal data
+`cntnr = MdfObjRead.hHD.getContainerOfAllCNsRegEx('.*');`   -> get a Matlab container (hash-list) of all signal whos name that fullfill the regex
+
+get everything in the container into the Matlab workspace:
+
+‘for key = cntnr.keys()’
+‘    sigData = cntnr(key{1}).getDataAsTimeseries();’
+‘    if ~isempty(sigData)’
+‘        assignin('base', sigData.Name, sigData);’
+‘    end’
+‘end’
+
+
 
 
 
