@@ -17,9 +17,11 @@ Each of the classes is handling its writing into or its reading from a mdf-file.
 The main class of the framework is MDF_OBJECT. It’s used to add simulation data for mdf file writing or it can be used to read in a mdf-file and extract the data.
   
 Example for writing:
-`simDataBucket = tsBucket();`
-`simDataBucket.add(logsout);     % logged signals`
   
+`simDataBucket = tsBucket();`
+
+`simDataBucket.add(logsout);     % logged signals`
+
 `MdfObjWrite = MDF_OBJECT();`
 `MdfObjWrite.importTsBucket(simDataBucket);` 
 `MdfObjWrite.print('testWrite.mdf');`
