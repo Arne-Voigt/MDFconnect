@@ -34,16 +34,18 @@ Example for reading:
 
 `MdfObjRead.read('testWrite.mdf');`   -> read the mdf file
 Next extract some signal data
+
 `cntnr = MdfObjRead.hHD.getContainerOfAllCNsRegEx('.*');`   -> get a Matlab container (hash-list) of all signal whos name that fullfill the regex
 
 get everything in the container into the Matlab workspace:
 
-‘for key = cntnr.keys()’
-‘    sigData = cntnr(key{1}).getDataAsTimeseries();’
-‘    if ~isempty(sigData)’
-‘        assignin('base', sigData.Name, sigData);’
-‘    end’
-‘end’
+`for key = cntnr.keys()`
+
+`    sigData = cntnr(key{1}).getDataAsTimeseries();`
+`    if ~isempty(sigData)`
+`        assignin('base', sigData.Name, sigData);`
+`    end`
+`end`
 
 
 
