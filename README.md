@@ -18,9 +18,9 @@ The main class of the framework is MDF_OBJECT. It’s used to add simulation data 
   
 Example for writing:
   
-`simDataBucket = tsBucket();`
+`simDataBucket = tsBucket();
 
-`simDataBucket.add(logsout);     % logged signals`
+simDataBucket.add(logsout);     % logged signals`
 
 `MdfObjWrite = MDF_OBJECT();`
 `MdfObjWrite.importTsBucket(simDataBucket);` 
