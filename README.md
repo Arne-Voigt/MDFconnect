@@ -17,16 +17,18 @@ Each of the classes is handling its writing into or its reading from a mdf-file.
 The main class of the framework is MDF_OBJECT. It’s used to add simulation data for mdf file writing or it can be used to read in a mdf-file and extract the data.
   
 ### Example for writing:
-  
-`simDataBucket = tsBucket();`
+start by collecting some data to write
+```  
+simDataBucket = tsBucket();
+simDataBucket.add(logsout);
+```
 
-`simDataBucket.add(logsout);`   -> get some simulation data
-
-`MdfObjWrite = MDF_OBJECT();`
-
-`MdfObjWrite.importTsBucket(simDataBucket);`   -> import the data
-
-`MdfObjWrite.print('testWrite.mdf');`   -> write the file
+Copy data into the object and write the file
+```
+MdfObjWrite = MDF_OBJECT();
+MdfObjWrite.importTsBucket(simDataBucket);
+MdfObjWrite.print('testWrite.mdf');
+```
 
 ### Example for reading:
 
@@ -42,7 +44,7 @@ next: extract signals into a Matlab container (hash-list), the signal name must 
 cntnr = MdfObjRead.hHD.getContainerOfAllCNsRegEx('.*');
 ```
 
-next: copy everything in the container into the Matlab workspace:
+finally: copy everything from the container into the Matlab workspace:
 ```
 for key = cntnr.keys()
     sigData = cntnr(key{1}).getDataAsTimeseries();
