@@ -52,14 +52,13 @@ next: copy everything in the container into the Matlab workspace:
 `end`
 
 ```
-{
 for key = cntnr.keys()
     sigData = cntnr(key{1}).getDataAsTimeseries();
     if ~isempty(sigData)
         assignin('base', sigData.Name, sigData);
     end
 end
-}```
+```
 
 
 
