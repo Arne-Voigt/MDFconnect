@@ -2,11 +2,11 @@
 ## Scope/Usage
 The repo allows the export of Matlab/Simulink simulation data into the mdf file format and the import from a mdf file for the use in Matlab/Simulink. The implementation should work for the 3.x versions of the file format, version 4.x (*.m4f) is not supported. 
   
- To get started use the repo [MDFconnect_example](https://github.com/Arne-Voigt/MDFconnect_example), it includes two simple example scripts for writing Simulink data into a mdf-file and for importing mdf data into the Matlab workspace. 
+ To get started use the repo [MDFconnect_example](https://github.com/Arne-Voigt/MDFconnect_example), it includes two simple example scripts for writing and reading. 
   
 This repo was generated to familiar myself with object orientated programming in Matlab, so don’t expect this to be error free. 
 However, I found it to be more reliable and faster than the widely used “mdfimport” script. 
-But you may also want to consider the “Vehicle Network Toolbox”, which is Matlabs internal toolbox for interactions with the mdf/m4f files. 
+But you may also want to consider the “Vehicle Network Toolbox”, which is Matlabs internal toolbox for interactions with mdf/m4f files. 
 Alternatively, you could use one of the mdf importer/exporter libraries from python, those are often well maintained, and access it through Matlabs python-interface.
 
 ## SW structure
@@ -32,13 +32,13 @@ MdfObjWrite.print('testWrite.mdf');
 
 ### Example for reading:
 
-start by reading in a mdf file
+start by reading the file
 ```
 MdfObjRead = MDF_OBJECT();
 MdfObjRead.read('testWrite.mdf');
 ```
 
-next: extract signals into a Matlab container (hash-list), the signal name must adhere to the regex string
+next: extract signals into a Map container (Matlabs version of a hash-list), the signal names must adhere to the regex string
 
 ```
 cntnr = MdfObjRead.hHD.getContainerOfAllCNsRegEx('.*');
