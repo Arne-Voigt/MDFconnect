@@ -11,7 +11,7 @@ classdef MDF_HD < MDF_BaseClass
         date      = datestr(now, 'dd:mm:yyyy');
         time      = datestr(now, 'HH:MM:SS');
         author    = 'Arne Voigt                      ';
-        division  = 'IAV                             ';
+        division  = 'AV                              ';
         project   = 'export simulink to mdf          ';
         misc      = '                                ';
         timestamp = 0;
